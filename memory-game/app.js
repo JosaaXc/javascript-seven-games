@@ -75,20 +75,19 @@ function checkMatch(){
         cards[optionTwoId].setAttribute('src', 'images/blank.png')
         alert('you have clicked the same image!')
     }
-
-    if(cardsChosen[0] == cardsChosen[1]){
-        alert('you found a match!')
+    else if(cardsChosen[0] == cardsChosen[1]){
         cards[optionOneId].setAttribute('src', 'images/white.png')
         cards[optionTwoId].setAttribute('src', 'images/white.png')
         cards[optionOneId].removeEventListener('click', flipCard)
         cards[optionTwoId].removeEventListener('click', flipCard)
-       
         cardsWon.push(cardsChosen)
-    }else{
+    }
+    else {
+        alert('sorry try again')
         cards[optionOneId].setAttribute('src', 'images/blank.png')
         cards[optionTwoId].setAttribute('src', 'images/blank.png')
-        alert('sorry try again')
     }
+    
     resultDisplay.textContent = cardsWon.length
     cardsChosen = []
     cardsChosenIds = []
@@ -97,12 +96,11 @@ function checkMatch(){
         resultDisplay.innerHTML = 'You found them all'
     }
 }
+
 function flipCard(){
     let cardId = this.getAttribute('data-id')
     cardsChosen.push(cardArray[cardId].name)
     cardsChosenIds.push(cardId)
-    console.log(cardsChosen)
-    console.log(cardsChosenIds)
     this.setAttribute('src', cardArray[cardId].img)
     if(cardsChosen.length === 2){
         setTimeout(checkMatch, 500)
